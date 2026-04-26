@@ -1,0 +1,35 @@
+# Secrets & credentials
+.env
+.env.*
+!.env.example
+token.pickle
+credentials.json
+
+# Données locales (spécifiques à l'instance)
+data.json
+data.json.*
+rag_db/
+backups/
+token.pickle.*
+
+# Logs
+bot.log
+bot.log.*
+bot.error.log
+bot.error.log.*
+backup.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,42 @@
+[Unit]
+Description=Qezdebou - Assistant Personnel Telegram Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=bot
+Group=bot
+WorkingDirectory=/home/bot/assistant-personnel
+Environment="PYTHONUNBUFFERED=1"
+EnvironmentFile=/home/bot/assistant-personnel/.env
+ExecStart=/home/bot/assistant-personnel/.venv/bin/python /home/bot/assistant-personnel/main.py
+
+# Redémarrage automatique (équivalent KeepAlive du LaunchAgent)
+Restart=always
+RestartSec=10
+StartLimitBurst=5
+StartLimitIntervalSec=300
+
+# Limites ressources (évite d'abattre le VPS si fuite mémoire)
+MemoryMax=2G
+CPUQuota=80%
+
+# Logging stdout/stderr → journalctl
+StandardOutput=append:/home/bot/assistant-personnel/bot.log
+StandardError=append:/home/bot/assistant-personnel/bot.error.log
+
+# Durcissement sécurité
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=false
+ReadWritePaths=/home/bot/assistant-personnel
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target
